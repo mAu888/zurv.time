@@ -1,0 +1,3 @@
+[submodule "library/zurv.core"]
+	path = library/zurv.core
+	url = git://github.com/mAu888/zurv.core.git
