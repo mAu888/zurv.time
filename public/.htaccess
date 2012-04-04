@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteBase /zurv.time/public
+
+RewriteRule ^(.*)[/]+$ $1 [R=301,L]
+
+# --
+RewriteCond $1 !^(index\.php)
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.*)$ index.php/$1 [L]

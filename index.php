@@ -1,5 +1,7 @@
 <?php
-require_once 'library/core.php';
+require_once 'library/zurv.core/Zurv/Application.php';
+
+/*require_once 'library/core.php';
 require_once 'library/toro.php';
 
 require_once 'config.php';
@@ -48,4 +50,4 @@ $site = new ToroApplication(array(
 	array('/tracks', 'TracksHandler')
 ));
 
-$site->serve();
+$site->serve();*/
