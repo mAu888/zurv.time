@@ -35,6 +35,11 @@ class Bootstrapper extends \Zurv\Bootstrapper\Base {
         '/reports' => array(
           'controller' => 'ReportsOverview',
           'action' => 'index'
+        ),
+        '/project(?:/(?P<id>[1-9]+[0-9]*))?' => array(
+          'controller' => 'Project',
+          'action' => 'index',
+          'id' => 99
         )
       )
     );

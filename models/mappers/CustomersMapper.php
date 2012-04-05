@@ -1,22 +1,22 @@
 <?php
 
-class ProjectsMapper extends \Zurv\Model\Mapper\Base {
+class CustomersMapper extends \Zurv\Model\Mapper\Base {
   public function fetchAll() {
     $query = $this->_db->query("
       SELECT
         `id`, `name`
       FROM
-        `projects`
+        `customers`
       ORDER BY
         `name` ASC
     ");
 
-    $projects = array();
-    foreach($query->fetchAll(PDO::FETCH_ASSOC) as $project) {
-      array_push($projects, $this->create($project));
+    $customers = array();
+    foreach($query->fetchAll(PDO::FETCH_ASSOC) as $customer) {
+      array_push($customers, $this->create($customer));
     }
 
-    return $projects;
+    return $customers;
   } 
 
   public function findById($id) {
@@ -24,19 +24,19 @@ class ProjectsMapper extends \Zurv\Model\Mapper\Base {
       SELECT
         `id`, `name`
       FROM
-        `projects`
+        `customers`
       WHERE
         `id` = :id
     ");
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 
-    $project = $stmt->fetch(PDO::FETCH_ASSOC);
+    $customer = $stmt->fetch(PDO::FETCH_ASSOC);
     
-    return $this->create($project);
+    return $this->create($customer);
   }
 
   public function create(array $seed = array()) {
-    return new Project($seed);
+    return new Customer($seed);
   }
 }

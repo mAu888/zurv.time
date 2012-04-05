@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="zurv.time" default="build" basedir=".">
+  <target name="prepare">
+    <input propertyname="branchOrTag" defaultValue="master" promptChar="?">branch/tag to build:</input>
+    <echo>Checking out branch/tag ${branchOrTag} ...</echo>
+    <gitcheckout repository="." branchname="${branchOrTag}" />
+  </target>
+
+  <!-- build -->
+  <target name="build" depends="prepare">
+    <echo msg="You are looking ..." />
+  </target>
+</project>
