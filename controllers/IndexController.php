@@ -9,7 +9,7 @@ class IndexController extends BaseController {
   protected $_template = 'index.php';
   public function indexAction(Request $request, Response $response) {
     $contentView = $this->_loadView('index/index.php');
-    $contentView->title = 'Oh baby mach dich naggisch!';
+    $contentView->title = 'Start!';
 
     $this->_view->content = $contentView;
 

@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import "bootstrap.less";
+@import "datepicker.less";
 
 [class^="icon-"],
 [class*=" icon-"] {
@@ -9,54 +10,49 @@
   background-image: url("images/glyphicons-halflings-white.png");
 }
 
-// My custom classes
-tr .btn-group, tr .btn {
-      margin: 0 auto;
-  visibility: hidden;
+@darkTextColor: #111;
+@grayVeryLight: #eee;
+
+@menuDropdownBackground: rgba(255,255,255,.9);
+
+ul.main-nav li {
+  float: left;
+  margin-right: 1px;
+
+  a {
+    color: @textColor;
+    .border-radius(5px);
+    padding: 5px 10px;
+  }
+
+  &.active a, a:hover {
+    background-color: @grayVeryLight;
+    color: @darkTextColor;
+  }
+
+  // Dropdown styles
+  .dropdown-menu {
+    background-color: @menuDropdownBackground;
+    border: none;
+    .box-shadow(none);
+
+    li {
+      clear: right;
+      .pull-right;
+      &.divider {
+        width: 100px;
+      }
+    }
+  }
 }
 
-tr:hover .btn-group, tr:hover .btn {
-  visibility: visible;
-}
-
-tr td:nth-child(5n+5) {
-  width: 100px;
-}
-
-td.recipe-image {
-  width: 64px;
-}
-td.recipe-image img {
-   max-width: 64px;
-  max-height: 64px;
-}
-
-.text-centered {
-  text-align: center;
-}
+// --
+// --
+// CLASSES
 .text-right {
-  text-align: right;
-}
-.dropdown-menu.tiny {
-  min-width: 80px;
+  text-align: right !important;
 }
 
-.label {
-       display: inline-block;
-  margin-right: 0px;
-      overflow: hidden;
-}
-.label .append {
-  background-color: rgba(255, 0, 0, .25);
-       border-left: 1px solid #888;
-            height: 17px;
-       line-height: 17px;
-           display: inline-block;
-            margin: -1px -5px -2px 0;
-           padding: 0 5px 0 3px;
-       .box-shadow(inset 1px 0 0 #aaa);
-    .border-radius(0 inherit 0 inherit);
-}
-.label .append:hover {
-  background-color: #DA4F49;
+.text-center {
+  text-align: center !important;
 }

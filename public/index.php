@@ -17,7 +17,7 @@ $app = \Zurv\Application::getInstance(
   array(
     'applicationPath' => realpath(dirname(__FILE__) . '/..') . '/',
     'bootstrapperClass' => '\Bootstrapper',
-    'libraryPath' => '../library/zurv.core/'
+    'libraryPath' => realpath(dirname(__FILE__) . '/..') . '/library/zurv.core/'
   )
 );
 

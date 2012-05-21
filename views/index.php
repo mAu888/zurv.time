@@ -19,7 +19,7 @@
         padding: 9px 0;
       }
     </style>
-    <link href="css/responsive.css" rel="stylesheet">
+    <!-- <link href="css/responsive.css" rel="stylesheet"> -->
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -35,54 +35,54 @@
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="./">zurv.time</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li <?php echo $this->isCurrentPage('customers', 'index') ? 'class="active"' : ''; ?>><a href="customers">Kunden</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projekte<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <?php foreach($this->projectList() as $project): ?>
-                  <li><a href="project/<?php echo $project->getId(); ?>"><?php echo $project; ?></a></li>
-                  <?php endforeach; ?>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="reports">Übersicht</a></li>
-                  <li class="divider"></li>
-                  <li><a href="reports/today">Heute</a></li>
-                  <li><a href="reports/current-week">Diese Woche</a></li>
-                  <li><a href="reports/current-month">Dieser Monat</a></li>
-                  <li class="divider"></li>
-                  <li><a href="reports/last-week">Letzte Woche</a></li>
-                  <li><a href="reports/last-month">Letzter Monat</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div><!--/.nav-collapse -->
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <h3>zurv.time</h3>
+        </div>
+        <div class="span8">
+          <ul class="nav main-nav pull-right">
+            <li <?php echo $this->isCurrentPage('customers', 'index') ? 'class="active"' : ''; ?>><a href="customers">Kunden</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projekte<b class="caret"></b></a>
+              <ul class="dropdown-menu span3">
+                <?php foreach($this->customerList() as $customer): ?>
+                  <?php if($customer->hasProjects()): ?>
+                    <li class="nav-header"><?php echo $customer; ?></li>
+                    <?php foreach($customer->getProjects() as $project): ?>
+                      <li><a href="project/<?php echo $project->getId(); ?>"><?php echo $project; ?></a></li>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
+              <ul class="dropdown-menu pull-right">
+                <li><a href="reports">Übersicht</a></li>
+                <li class="divider"></li>
+                <li><a href="reports/today">Heute</a></li>
+                <li><a href="reports/current-week">Diese Woche</a></li>
+                <li><a href="reports/current-month">Dieser Monat</a></li>
+                <li class="divider"></li>
+                <li><a href="reports/last-week">Letzte Woche</a></li>
+                <li><a href="reports/last-month">Letzter Monat</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      
-      <?php echo $content; ?>
+      <div class="row">
 
-      <hr>
+        <?php echo $content; ?>
 
-      <footer>
-        <p>&copy; <a href="http://www.zurv.de">zurv webdevelopment</a> 2012</p>
-      </footer>
+        <hr>
+
+        <footer>
+          <p>&copy; <a href="http://www.zurv.de">zurv webdevelopment</a> 2012</p>
+        </footer>
+      </div>
 
     </div><!--/.fluid-container-->
 
@@ -102,6 +102,8 @@
     <script src="js/bootstrap-collapse.js"></script>
     <script src="js/bootstrap-carousel.js"></script>
     <script src="js/bootstrap-typeahead.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/script.js"></script>
 
   </body>
 </html>

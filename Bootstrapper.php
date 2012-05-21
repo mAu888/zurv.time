@@ -1,5 +1,6 @@
 <?php
 use \Zurv\Application;
+use \Zurv\Router\Route;
 
 class Bootstrapper extends \Zurv\Bootstrapper\Base {
   public function initDatabase(Application $application) {
@@ -28,21 +29,46 @@ class Bootstrapper extends \Zurv\Bootstrapper\Base {
     });
   }
 
+  public function initLanguage(Application $application) {
+    if(! setlocale(LC_ALL, 'de_DE.utf8')) {
+      setlocale(LC_ALL, 'de_DE');
+    }
+  }
+
   public function initRoutes(Application $application) {
+    $router = $application->getRouter();
+
     // Behold! Add most specific rotes first!
-    $application->getRouter()->addRoutes(
+    // As ajax routes are more specific, because they
+    // match only on xmlhttprequest header, add them first
+    $router->addRoutes(
       array(
-        '/reports' => array(
-          'controller' => 'ReportsOverview',
+        '/project' => array(
+          'controller' => 'ProjectManage',
+          'action' => 'addProjectAjax',
+          'isAjax' => true,
+          'requestTypes' => array(Route::POST)
+        ),
+        '/track' => array(
+          'controller' => 'ProjectManage',
+          'action' => 'addTrackAjax',
+          'isAjax' => true,
+          'requestTypes' => array(Route::POST)
+        ),
+        '/reports(?:/(:action)?)?' => array(
+          'controller' => 'Reports',
           'action' => 'index'
         ),
         '/project(?:/(?P<id>[1-9]+[0-9]*))?' => array(
           'controller' => 'Project',
           'action' => 'index',
           'id' => 99
+        ),
+        '/(:controller(?:/(:action)?)?)?' => array(
+          'controller' => 'Index',
+          'action' => 'index'
         )
       )
     );
-    $application->getRouter()->addRoute('/(:controller(?:/(:action)?)?)?', 'Index', 'index');
   }
 }
