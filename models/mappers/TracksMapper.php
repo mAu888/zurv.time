@@ -46,10 +46,10 @@ class TracksMapper extends \Zurv\Model\Mapper\Base {
     $id = $track->getId();
 
     if($id === -1) {
-      $this->insert($track);
+      return $this->insert($track);
     }
     else {
-      $this->update($track);
+      return $this->update($track);
     }
   }
 

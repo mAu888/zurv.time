@@ -19,8 +19,19 @@ $(document).ready ->
   $datepicker.on 'changeDate', (e) ->
     $(this).datepicker 'hide'
 
+  reset = ($this) ->
+    $this.find('[name="description"]').val('')
+    $this.find('[name="rate"]').val('')
+    $this.find('[name="minutes"]').val('')
+    $this.find('[name="paid"]').prop 'checked', false
+    $this.find('[name="date"]').val('')
+    $datepicker.find('input').val(formatDate())
+
   $('#modal-add-track').on 'show', (e) ->
     $datepicker.find('input').val(formatDate())
+
+  $('#modal-add-track').on 'hide', (e) ->
+    reset $(this)
 
   $('#modal-add-track form').on 'submit', (e) ->
     e.preventDefault()
@@ -31,7 +42,7 @@ $(document).ready ->
     rate = $this.find('[name="rate"]').val()
     minutes = $this.find('[name="minutes"]').val()
     paid = $this.find('[name="paid"]').prop 'checked'
-    date = $this.find('[name="date"]').data('date-object').getTime()
+    date = $this.find('[name="date"]').val()
     projectId = $(this).data 'project-id'
 
     $.ajax
@@ -42,9 +53,10 @@ $(document).ready ->
         rate: rate
         minutes: minutes
         paid: paid
-        date: Math.round(date.getTime()/1000)
+        date: date
         projectId: projectId
       success: (response) =>
         console.log response
-      complete:
+      complete: () =>
+        reset $this
         $(this).parent().modal 'hide'

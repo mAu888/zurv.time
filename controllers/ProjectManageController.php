@@ -15,8 +15,11 @@ class ProjectManageController extends \Zurv\Controller\Base {
     $rate        = (float)$request->getParameter('rate');
     $minutes     = (int)$request->getParameter('minutes');
     $paid        = (bool)$request->getParameter('paid');
-    $date        = (int)$request->getParameter('date');
+    $date        = (string)$request->getParameter('date');
     $projectId   = (int)$request->getParameter('projectId');
+
+    // Convert the date
+    $date = DateTime::createFromFormat('d.m.Y', $date);
 
     $projectsMapper = new ProjectsMapper($this->getApplication()->getRegistry()->db);
     $project = $projectsMapper->findById($projectId);
