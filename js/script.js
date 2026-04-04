@@ -69,7 +69,7 @@
     Track.prototype.sum = function(asNumber) {
       var sum;
       sum = (this.minutes / 60) * this.rate;
-      if ((asNumber != null) && !asNumber) sum.toFixed(2);
+      if ((asNumber != null) && !asNumber) return sum.toFixed(2);
       return sum;
     };
 
@@ -87,11 +87,7 @@
     Track.prototype.formattedDate = function() {
       var date;
       date = new Date(parseInt(this.date, 10));
-      if (!(typeof format !== "undefined" && format !== null) || format === 'd-m') {
-        return "" + (date.getDate()) + ". " + month[date.getMonth()];
-      } else if (format === 'y-m-d') {
-        return "" + (date.getFullYear()) + "-" + (date.getMonth() + 1) + "-" + (date.getDate());
-      }
+      return "" + (date.getDate()) + ". " + month[date.getMonth()];
     };
 
     Track.prototype.industryTime = function() {
