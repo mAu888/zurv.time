@@ -6,7 +6,7 @@ class TracksHandler extends BaseHandler {
 	public function get_xhr($projectId = -1) {
 		
 		if($projectId > 0) {
-			$stmt = $this->_db->prepare('SELECT *, `project_id` AS `project` FROM `tracks` WHERE `project_id` = :project ORDER BY `date` DESC');
+			$stmt = $this->_db->prepare('SELECT *, `project_id` AS `project` FROM `tracks` WHERE `project_id` = :project AND `deleted` = 0 ORDER BY `date` DESC');
 			$stmt->execute(array(':project' => $projectId));
 		}
 		else {
@@ -44,13 +44,13 @@ class TracksHandler extends BaseHandler {
 class TrackHandler extends BaseHandler {
 	public function put_xhr($id) {
 		$stmt = $this->_db->prepare('UPDATE `tracks` SET `description` = :description, `date` = :date, `rate` = :rate, `minutes` = :minutes, `paid` = :paid WHERE `id` = :id');
-		
+
 		$stmt->execute(array(
 			':description' => $_POST['description'],
 			':date' => date('Y-m-d H:i:s', $_POST['date']/1000),
 			':rate' => $_POST['rate'],
 			':minutes' => $_POST['minutes'],
-			':id' => $_POST['id'],
+			':id' => $id,
 			':paid' => $_POST['paid'] ? 1 : 0
 		));
 		

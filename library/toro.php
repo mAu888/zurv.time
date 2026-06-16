@@ -104,7 +104,6 @@ class ToroApplication {
         }
         else {
             header('HTTP/1.0 404 Not Found');
-            var_dump($discovered_handler);
             echo '404 Not Found';
             exit;
         }
@@ -124,11 +123,11 @@ class ToroApplication {
     }
 
     private function ipad_request() {
-        return strstr($_SERVER['HTTP_USER_AGENT'], 'iPad');
+        return isset($_SERVER['HTTP_USER_AGENT']) && strstr($_SERVER['HTTP_USER_AGENT'], 'iPad');
     }
 
     private function mobile_request() {
-        return strstr($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'], 'iPod') || strstr($_SERVER['HTTP_USER_AGENT'], 'Android') || strstr($_SERVER['HTTP_USER_AGENT'], 'webOS');
+        return isset($_SERVER['HTTP_USER_AGENT']) && (strstr($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'], 'iPod') || strstr($_SERVER['HTTP_USER_AGENT'], 'Android') || strstr($_SERVER['HTTP_USER_AGENT'], 'webOS'));
     }
 }
 
